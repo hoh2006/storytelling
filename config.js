@@ -1,68 +1,98 @@
 var config = {
-    // style: 'mapbox://styles/mapbox/streets-v12',
+    style: 'mapbox://styles/mapbox/light-v11',
     // leave commented to use Mapbox Standard Style
-    accessToken: 'YOUR_MAPBOX_ACCESS_TOKEN',
-    showMarkers: true,
-    markerColor: '#3FB1CE',
-    //projection: 'equirectangular',
+    accessToken: 'pk.eyJ1IjoiaG9oMjAwNiIsImEiOiJjbTkxeXpqZWMwNmI4Mmpvam5pc3BrZzh3In0.f3u-9QwEhntO7BGXqxoTkg',
+    // showMarkers: true,
+    // markerColor: '#3FB1CE',
+    projection: 'equirectangular',
     //Read more about available projections here
     //https://docs.mapbox.com/mapbox-gl-js/example/projections/
-    inset: true,
-    insetOptions: {
-        markerColor: 'orange'
-    },
+    // inset: true,
+    // insetOptions: {
+    //     markerColor: 'orange'
+    // },
     insetPosition: 'bottom-right',
     theme: 'dark',
-    use3dTerrain: false, //set true for enabling 3D maps.
+    use3dTerrain: true, //set true for enabling 3D maps.
     auto: false,
-    title: 'Your Title Goes Here',
-    subtitle: 'The Storytelling Template helps you create an awesome animated map story with ease.',
-    byline: 'By a I.M. Amapper',
-    footer: 'Source: source citations, etc. <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
+    title: 'Shore-to-Core-to-Shore Tax Increment Financing (TIF) District',
+    subtitle: 'Plans to Revitalize Downtown Cleveland, Ohio',
+    byline: 'By Henry Hoffmann',
+    footer: 'Source: <a href="https://www.clevelandohio.gov/city-hall/office-mayor/mayors-initiatives/shore-core-shore" target="_blank">City of Cleveland</a> <br> Created using <a href="https://github.com/mapbox/storytelling" target="_blank">Mapbox Storytelling</a> template.',
     chapters: [
         {
             id: 'slug-style-id',
-            alignment: 'left',
+            alignment: 'right',
             hidden: false,
-            title: 'San Francisco',
-            image: './assets/san-fran.jpeg',
-            description: 'The first chapter contains a title, image, and camera view for San Francisco, California. Update the chapter data to make it your own.',
+            title: 'How to Use this Map',
+            image: '',
+            description: 'Scroll through this map to understand and walk through the Shore-to-Core-to-Shore Tax Increment Financing (TIF) District in Cleveland.',
             location: {
-                center: [-122.418398, 37.759483],
-                zoom: 8.5,
-                pitch: 60,
+                center: [-81.69658, 41.49380],
+                zoom: 10,
+                pitch: 30,
                 bearing: 0
             },
             mapAnimation: 'flyTo',
-            rotateAnimation: false,
-            callback: '',
+            rotateAnimation: true,
+            callback: 'setIntroBasemap',
             onChapterEnter: [
                 // {
-                //     layer: 'layer-name',
-                //     opacity: 1,
-                //     duration: 5000
+                //     layer: '',
+                //     opacity: 0.3,
+                //     duration: 1000
                 // }
             ],
             onChapterExit: [
                 // {
-                //     layer: 'layer-name',
+                //     layer: '',
                 //     opacity: 0
                 // }
+            ]
+        },
+        {
+            id: 'first-identifier',
+            alignment: 'left',
+            hidden: false,
+            title: 'What is Shore-to-Core-to-Shore?',
+            image: '/TIF District Overview.webp',
+            description: 'Shore-to-Core-to-Shore is an initiative in the City of Cleveland, Ohio to redevelop and transform downtown Cleveland. The plan aims to generate between 3.5 and 7.5 billion dollars worth of revenue through a Tax Increment Financing District to revitalize the lakefront, the downtown core, and the riverfront.',
+            location: {
+                center: [-81.69658, 41.49380],
+                zoom: 10,
+                pitch: 30,
+                bearing: 0
+            },
+            mapAnimation: 'flyTo',
+            rotateAnimation: true,
+            callback: 'setLightBasemapWithBoundary',
+            onChapterEnter: [
+                {
+                    layer: 'clevelandboundary',
+                    opacity: 0.3,
+                    duration: 1000
+                }
+            ],
+            onChapterExit: [
+                {
+                    layer: 'clevelandboundary',
+                    opacity: 0
+                }
             ]
         },
         {
             id: 'second-identifier',
             alignment: 'right',
             hidden: false,
-            title: 'Washington, D.C.',
-            image: './assets/washington-dc.jpg',
-            description: 'The second chapter flies to Washington, D.C., updates the camera pitch, and slowly rotates. <br>  <br> Washington, D.C., the capital of the United States, is a vibrant city known for its iconic landmarks, including the White House, the U.S. Capitol, and the Washington Monument. It serves as the political heart of the nation and a center for history, culture, and international diplomacy.',
+            title: 'What is the Shore-to-Core-to-Shore Tax Increment Financing District?',
+            image: '/TIF District .jpg',
+            description: 'The Shore-to-Core-to-Shore Tax Increment Financing district, or TIF, is a designated zone where a portion of new property tax revenue generated by an increase in property values are redirected to a separate fund. The dollars in the fund are then used for public investments, and in this case, the City of Cleveland can spend funds throughout the city, but will focus on substantial investments along the lakefront, riverfront, and in the downtown core.',
             location: {
-                center: [-77.020636, 38.886900],
-                zoom: 8.5,
-                pitch: 60,
-                bearing: -43.2,
-                // flyTo additional controls-
+                center: [-81.71360, 41.49552],
+                zoom: 12.9,
+                pitch: 70,
+                bearing: 136.8,
+                // flyTo 
                 // These options control the flight curve, making it move
                 // slowly and zoom out almost completely before starting
                 // to pan.
@@ -70,48 +100,496 @@ var config = {
                 //curve: 1, // change the speed at which it zooms out
             },
             mapAnimation: 'flyTo',
-            rotateAnimation: true,
+            rotateAnimation: false,
             callback: '',
-            onChapterEnter: [],
-            onChapterExit: []
+            onChapterEnter: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.3,
+                    duration: 1000
+                }
+            ],
+            onChapterExit: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0
+                }
+            ]
         },
         {
             id: 'third-identifier',
             alignment: 'left',
             hidden: false,
-            title: 'Geneva',
-            image: './assets/geneva.jpg',
-            description: 'Geneva, Switzerland, is a picturesque city nestled along the shores of Lake Geneva, surrounded by the Alps and Jura mountains. Known as a global hub for diplomacy and finance, it is home to numerous international organizations, including the United Nations and the Red Cross.',
+            title: 'The Lakefront',
+            image: '/Lakefront image.jpg',
+            description: 'The City of Cleveland has spent years surveying Cleveland residents (over 5,000) to collect community input for the creation of a North Coast Master Plan, which will outline on how to redevelop the lakefront area for all Clevelanders to enjoy. Results from the engagement process have shown that Nature and Green Space, Water Access, and Community Spaces and Events are part of the vision that Clevelanders hope to see. The rendering depicts a host of redevelopment projects, including commercial development, housing, and green space all across the waterfront.',
             location: {
-                center: [6.15116, 46.20595],
-                zoom: 12.52,
-                pitch: 8.01,
-                bearing: 0.00
+                center: [-81.69933, 41.50927],
+                zoom: 16.05,
+                pitch: 70,
+                bearing: 136.8
+            },
+            mapAnimation: 'flyTo',
+            rotateAnimation: false,
+            callback: 'add3DBuildings',
+            onChapterEnter: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2,
+                    duration: 1000
+                }
+            ],
+            onChapterExit: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2
+                }
+            ]
+        },
+        {
+            id: 'fourth-identifier',
+            alignment: 'right',
+            hidden: false,
+            title: 'Proposed North Coast Connector',
+            image: 'NorthCoast.png',
+            description: '',
+            location: {
+                center: [-81.70048, 41.50368],
+                zoom: 17,
+                pitch: 60,
+                bearing: 60
             },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: [],
-            onChapterExit: []
+            onChapterEnter: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2,
+                    duration: 1000
+                },
+                {
+                    layer: 'clevelandmovesbikelanes',
+                    opacity: 0.3,
+                    duration: 1000
+                }
+            ],
+            onChapterExit: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2
+                },
+                {
+                    layer: 'clevelandmovesbikelanes',
+                    opacity: 0.3
+                }
+            ]
         },
         {
-            id: 'fourth-chapter',
-            alignment: 'fully',
+            id: 'fifth-identifier',
+            alignment: 'left',
             hidden: false,
-            title: 'Buenos Aires',
-            image: './assets/buenos-aires.jpg',
-            description: 'Buenos Aires, the capital of Argentina, is a dynamic city known for its European-inspired architecture, vibrant tango culture, and rich culinary scene. Often called the "Paris of South America," it blends historic charm with modern energy.  You can add as many chapters as you need, just copy the JSON data and make changes.',
+            title: 'The Downtown Core',
+            image: '',
+            description: '',
             location: {
-                center: [-58.54195, -34.71600],
-                zoom: 4,
+                center: [-81.69465, 41.50076],
+                zoom: 15,
                 pitch: 0,
                 bearing: 0
             },
             mapAnimation: 'flyTo',
             rotateAnimation: false,
             callback: '',
-            onChapterEnter: [],
-            onChapterExit: []
+            onChapterEnter: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2,
+                    duration: 1000
+                },
+                {
+                    layer: 'clevelandmovesbikelanes',
+                    opacity: 0.5,
+                    duration: 1000
+                }
+            ],
+            onChapterExit: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2
+                },
+                {
+                    layer: 'clevelandmovesbikelanes',
+                    opacity: 0
+                }
+            ]
+        },
+        {
+            id: 'sixth-identifier',
+            alignment: 'right',
+            hidden: false,
+            title: 'The Shore of the Cuyahoga River',
+            image: '',
+            description: '',
+            location: {
+                center: [-81.69524, 41.49310],
+                zoom: 17,
+                pitch: 70,
+                bearing: 25
+            },
+            mapAnimation: 'flyTo',
+            rotateAnimation: false,
+            callback: '',
+            onChapterEnter: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2,
+                    duration: 1000
+                },
+            ],
+            onChapterExit: [
+                {
+                    layer: 'shoretocoreboundary',
+                    opacity: 0.2
+                },
+            ]
         }
     ]
 };
+
+var initLoad = true;
+var layerTypes = {
+    'fill': ['fill-opacity'],
+    'line': ['line-opacity'],
+    'circle': ['circle-opacity', 'circle-stroke-opacity'],
+    'symbol': ['icon-opacity', 'text-opacity'],
+    'raster': ['raster-opacity'],
+    'fill-extrusion': ['fill-extrusion-opacity'],
+    'heatmap': ['heatmap-opacity']
+}
+
+var alignments = {
+    'left': 'lefty',
+    'center': 'centered',
+    'right': 'righty',
+    'full': 'fully'
+}
+
+// ChatGPT helped me figure out how to use these two functions below to transition from one basemap layer to another while scrolling while embedding the TIF in the second chapter
+function getLayerPaintType(layerId) {
+    var mapLayer = map.getLayer(layerId);
+    if (!mapLayer) {
+        console.warn(`Layer "${layerId}" not found on map.`);
+        return null;
+    }
+    return layerTypes[mapLayer.type]
+}
+
+function setLayerOpacity(layer) {
+    var paintProps = getLayerPaintType(layer.layer);
+    if (!paintProps) return;
+    paintProps.forEach(function (prop) {
+        var options = {};
+        if (layer.duration) {
+            var transitionProp = prop + "-transition";
+            options = { "duration": layer.duration };
+            map.setPaintProperty(layer.layer, transitionProp, options);
+        }
+        map.setPaintProperty(layer.layer, prop, layer.opacity, options);
+    });
+}
+
+var story = document.getElementById('story');
+var features = document.createElement('div');
+features.setAttribute('id', 'features');
+
+var header = document.createElement('div');
+
+if (config.title) {
+    var titleText = document.createElement('h1');
+    titleText.innerText = config.title;
+    header.appendChild(titleText);
+}
+
+if (config.subtitle) {
+    var subtitleText = document.createElement('h2');
+    subtitleText.innerText = config.subtitle;
+    header.appendChild(subtitleText);
+}
+
+if (config.byline) {
+    var bylineText = document.createElement('p');
+    bylineText.innerText = config.byline;
+    header.appendChild(bylineText);
+}
+
+if (header.innerText.length > 0) {
+    header.classList.add(config.theme);
+    header.setAttribute('id', 'header');
+    story.appendChild(header);
+}
+
+config.chapters.forEach((record, idx) => {
+    var container = document.createElement('div');
+    var chapter = document.createElement('div');
+
+    if (record.title) {
+        var title = document.createElement('h3');
+        title.innerText = record.title;
+        chapter.appendChild(title);
+    }
+
+    if (record.image) {
+        var image = new Image();
+        image.src = record.image;
+        chapter.appendChild(image);
+    }
+
+    if (record.description) {
+        var story = document.createElement('p');
+        story.innerHTML = record.description;
+        chapter.appendChild(story);
+    }
+
+    container.setAttribute('id', record.id);
+    container.classList.add('step');
+    if (idx === 0) {
+        container.classList.add('active');
+    }
+
+    chapter.classList.add(config.theme);
+    container.appendChild(chapter);
+    container.classList.add(alignments[record.alignment] || 'centered');
+    if (record.hidden) {
+        container.classList.add('hidden');
+    }
+    features.appendChild(container);
+});
+
+story.appendChild(features);
+
+var footer = document.createElement('div');
+
+if (config.footer) {
+    var footerText = document.createElement('p');
+    footerText.innerHTML = config.footer;
+    footer.appendChild(footerText);
+}
+
+if (footer.innerText.length > 0) {
+    footer.classList.add(config.theme);
+    footer.setAttribute('id', 'footer');
+    story.appendChild(footer);
+}
+
+mapboxgl.accessToken = config.accessToken;
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: config.style,
+    center: config.chapters[0].location.center,
+    zoom: config.chapters[0].location.zoom,
+    bearing: config.chapters[0].location.bearing,
+    pitch: config.chapters[0].location.pitch,
+    interactive: false,
+    projection: config.projection
+});
+
+// Create a inset map if enabled in config.js
+if (config.inset) {
+    map.addControl(
+        new GlobeMinimap({ ...config.insetOptions }),
+        config.insetPosition
+    );
+}
+
+// instantiate the scrollama
+var scroller = scrollama();
+
+
+map.on("load", function () {
+    if (config.use3dTerrain) {
+        map.addSource('mapbox-dem', {
+            'type': 'raster-dem',
+            'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+            'tileSize': 512,
+            'maxzoom': 14
+        });
+        // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+
+        // add a sky layer that will show when the map is highly pitched
+        map.addLayer({
+            'id': 'sky',
+            'type': 'sky',
+            'paint': {
+                'sky-type': 'atmosphere',
+                'sky-atmosphere-sun': [0.0, 0.0],
+                'sky-atmosphere-sun-intensity': 15
+            }
+            });
+    }
+});
+
+    // setup the instance, pass callback functions
+    scroller
+        .setup({
+            step: '.step',
+            offset: 0.5,
+            progress: true
+        })
+        .onStepEnter(async response => {
+            var current_chapter = config.chapters.findIndex(chap => chap.id === response.element.id);
+            var chapter = config.chapters[current_chapter];
+
+            response.element.classList.add('active');
+            map[chapter.mapAnimation || 'flyTo'](chapter.location);
+
+            if (config.showMarkers) {
+                marker.setLngLat(chapter.location.center);
+            }
+            if (chapter.onChapterEnter.length > 0) {
+                chapter.onChapterEnter.forEach(setLayerOpacity);
+            }
+            if (chapter.callback) {
+                window[chapter.callback]();
+            }
+            if (chapter.rotateAnimation) {
+                map.once('moveend', () => {
+                    const rotateNumber = map.getBearing();
+                    map.rotateTo(rotateNumber + 180, {
+                        duration: 30000, easing: function (t) {
+                            return t;
+                        }
+                    });
+                });
+            }
+            if (config.auto) {
+                var next_chapter = (current_chapter + 1) % config.chapters.length;
+                map.once('moveend', () => {
+                    document.querySelectorAll('[data-scrollama-index="' + next_chapter.toString() + '"]')[0].scrollIntoView();
+                });
+            }
+        })
+        .onStepExit(response => {
+            var chapter = config.chapters.find(chap => chap.id === response.element.id);
+            response.element.classList.remove('active');
+            if (chapter.onChapterExit.length > 0) {
+                chapter.onChapterExit.forEach(setLayerOpacity);
+            }
+        });
+
+
+    if (config.auto) {
+        document.querySelectorAll('[data-scrollama-index="0"]')[0].scrollIntoView();
+    };
+
+function setIntroBasemap() {
+    map.setStyle('mapbox://styles/mapbox/outdoors-v12');
+    map.once('styledata', () => {
+        // Taking the boundary out of the map to begin and then adding a different basemap
+    });
+}
+
+function setLightBasemapWithBoundary() {
+    map.setStyle('mapbox://styles/mapbox/light-v11');
+
+    map.once('styledata', () => {
+        // Adding the city limit boundary layer only after the new light style loads
+        if (!map.getSource('clevelandboundary')) {
+            map.addSource('clevelandboundary', {
+                type: 'geojson',
+                data: './clevelandboundary.geojson'
+            });
+
+            map.addLayer({
+                id: 'clevelandboundary',
+                type: 'fill',
+                source: 'clevelandboundary',
+                layout: {},
+                paint: {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.3
+                }
+            });
+        };
+        // Adding the TIF boundary layer only after the new light style loads 
+        if (!map.getSource('shoretocoreboundary')) {
+            map.addSource('shoretocoreboundary', {
+                'type': 'geojson',
+                'data': './Shore_to_Core_to_Shore_TIF_District.geojson'
+            });
+
+            map.addLayer({
+                'id': 'shoretocoreboundary',
+                'type': 'fill',
+                'source': 'shoretocoreboundary',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#088',
+                    'fill-opacity': 0.8
+                }
+            });
+        };
+        if (!map.getSource('clevelandmovesbikelanes')) {
+            map.addSource('clevelandmovesbikelanes', {
+                'type': 'geojson',
+                'data': './Cleveland_Moves_Bikeway_Vision_Network.geojson'
+            });
+            map.addLayer({
+                'id': 'clevelandmovesbikelanes',
+                'type': 'line',
+                'source': 'clevelandmovesbikelanes',
+                'layout': {
+                    'line-join': 'round',
+                    'line-cap': 'round',
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'line-color': 'green',
+                    'line-width': 5,
+                    'line-opacity': 0
+                }
+            });
+        }
+    });
+}
+
+// using this function to remove the TIF boundary and bring in 3d buildings in the fourth chapter; very helpful with ChatGPT and copilot
+function add3DBuildings() {
+    map.once('styledata', () => {
+        // if (map.getLayer('shoretocoreboundary')) {
+        //     map.removeLayer('shoretocoreboundary');
+        //     map.removeSource('shoretocoreboundary');
+        // }
+        if (!map.getLayer('3d-buildings')) {
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa',
+                    // use an "interpolate" expression to add a smooth transition effect
+                    // from low to high elevation.
+                    'fill-extrusion-height': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "height"]
+                    ],
+                    'fill-extrusion-base': [
+                        "interpolate", ["linear"], ["zoom"],
+                        15, 0,
+                        15.05, ["get", "min_height"]
+                    ],
+                    'fill-extrusion-opacity': .9,
+                    'fill-extrusion-color': '#ea8356'
+                }
+            });
+        }
+    });
+}
+
+
